@@ -1,4 +1,4 @@
-# 🛡️ Real-Time Content Moderation System
+﻿# 🛡️ Real-Time Content Moderation System
 
 > Detect toxic and policy-violating content before it reaches users — powered by fine-tuned DistilBERT + ONNX Runtime + FastAPI.
 
@@ -8,7 +8,8 @@
 ![DistilBERT](https://img.shields.io/badge/DistilBERT-HuggingFace-yellow)
 ![Tests](https://img.shields.io/badge/Tests-16%2F18%20Passing-brightgreen)
 
-**?? Live Demo:** https://content-moderation-f8aq.onrender.com/docs
+**Live Demo:** https://content-moderation-f8aq.onrender.com/docs
+
 **🌐 Live Demo:** https://content-moderation-f8aq.onrender.com/docs
 ---
 
