@@ -1,0 +1,36 @@
+# ── Stage 1: Base image ───────────────────────────────────────────────────────
+FROM python:3.11-slim AS base
+
+WORKDIR /app
+
+# System dependencies for ONNX Runtime
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# ── Stage 2: Dependencies ─────────────────────────────────────────────────────
+FROM base AS deps
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# ── Stage 3: Final image ──────────────────────────────────────────────────────
+FROM deps AS final
+
+COPY . .
+
+# Pre-download tokenizer to avoid cold start
+RUN python -c "from transformers import DistilBertTokenizerFast; DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')"
+
+EXPOSE 8000
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run FastAPI with Uvicorn (async, production-grade ASGI server)
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

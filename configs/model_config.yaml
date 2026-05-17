@@ -1,0 +1,44 @@
+# configs/model_config.yaml
+# Central config for training, inference, and export
+
+model:
+  base: "distilbert-base-uncased"
+  num_labels: 2
+  max_length: 128
+  labels:
+    0: "non_toxic"
+    1: "toxic"
+
+training:
+  batch_size: 32
+  num_epochs: 3
+  learning_rate: 2e-5
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  seed: 42
+
+data:
+  train_path: "data/processed/train.csv"
+  val_path: "data/processed/val.csv"
+  test_path: "data/processed/test.csv"
+  toxic_ratio_target: 0.40  # Balance dataset to this % of toxic samples
+
+inference:
+  default_threshold: 0.50
+  max_batch_size: 100
+  onnx_threads: 4
+  target_latency_ms: 50
+
+paths:
+  finetuned_model: "models/finetuned"
+  onnx_model: "models/onnx/model.onnx"
+  onnx_tokenizer: "models/onnx/tokenizer"
+  logs: "logs/"
+
+categories:
+  - hate_speech
+  - harassment
+  - violence
+  - sexual_explicit
+  - spam
