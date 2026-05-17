@@ -7,6 +7,8 @@
 ![ONNX](https://img.shields.io/badge/ONNX-Runtime-orange)
 ![DistilBERT](https://img.shields.io/badge/DistilBERT-HuggingFace-yellow)
 ![Tests](https://img.shields.io/badge/Tests-16%2F18%20Passing-brightgreen)
+
+**?? Live Demo:** https://content-moderation-f8aq.onrender.com/docs
 **🌐 Live Demo:** https://content-moderation-f8aq.onrender.com/docs
 ---
 
@@ -247,3 +249,4 @@ In production (e.g. Meta scale):
 ## 👩‍💻 Author
 
 **Shreya** — [GitHub](https://github.com/shreya8-p)
+
